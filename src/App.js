@@ -1,25 +1,63 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect, createContext } from 'react'
+import styled from 'styled-components'
+import { Routes, Route } from 'react-router'
 
-function App() {
+import { desktop, tablet, mobile } from 'utils/media'
+
+import Scroll from 'components/Scroll'
+import Nav from 'components/Nav'
+import Home from 'pages/Home'
+
+export const ScreenContext = createContext({fullWidth: false, desktop: false, tablet: false, mobile: false})
+
+const App = () => {
+
+  const [screen, setScreen] = useState({
+    fullWidth: false,
+    desktop: false,
+    tablet: false,
+    mobile: false
+  })
+ 
+  useEffect(() => {
+    const updateScreen = () => {
+      let { innerWidth } = window
+
+      setScreen({
+        fullWidth: innerWidth > desktop,
+        desktop: innerWidth <= desktop && innerWidth > tablet,
+        tablet: innerWidth <= tablet && innerWidth > mobile,
+        mobile: innerWidth <= mobile
+      })
+    }
+
+    updateScreen()
+
+    window.addEventListener('resize', updateScreen)
+
+    return () => {
+      window.removeEventListener('resize', updateScreen)
+    }
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ScreenContext.Provider value={screen}>
+      <Wrapper data-scroll-container className="smooth-scroll">
+        <Scroll/>
+        <Nav/>
+
+        <Routes>
+          <Route exact path="/" element={<Home/>}/>
+
+        </Routes>
+
+      </Wrapper>
+    </ScreenContext.Provider>
   );
 }
 
 export default App;
+
+const Wrapper = styled.main`
+  overflow: hidden;
+`

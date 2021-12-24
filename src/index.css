@@ -1,3 +1,15 @@
+
+@font-face {
+  font-family: "Helvetica Roman";
+  src: url(./fonts/HelveticaBQ-Roman.otf) format('opentype');
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0px;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
