@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { desktop } from 'utils/media'
 
 import Button from 'components/Button'
+import ImageRipple from 'components/ImageRipple'
 
 import MicahHome from 'images/micah_home.webp'
 
@@ -20,7 +21,7 @@ const Home = () => {
         <ButtonWrapper>
           <Button>view collection >></Button>
         </ButtonWrapper>
-        <Img src={MicahHome} alt="Micah Brown" height="730" width="519"/>
+        <ImageRipple/>
       </MaxWidth>
     </Wrapper>
   )
@@ -30,6 +31,7 @@ export default Home
 
 const Wrapper = styled.div`
   min-height: 100vh;
+  height: 100vh;
 `
 
 const MaxWidth = styled.div`
@@ -40,7 +42,7 @@ const MaxWidth = styled.div`
   margin: 0 auto;
 `
 
-const Img = styled.img`
+const Img = styled.div`
   position: absolute;
 
   top: 120px;

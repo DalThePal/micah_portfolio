@@ -10,8 +10,6 @@ const Nav = () => {
 
   const location = useLocation()
 
-  console.log(location)
-
   return (
     <>
       <Email href="mailto:micahbode@gmail.com">micahbode@gmail.com</Email>
@@ -39,6 +37,7 @@ const Font = `
 
 const Routes = styled.div`
   position: absolute;
+  z-index: 9;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -71,6 +70,7 @@ const Email = styled.a`
   ${Font}
   text-decoration: none;
   position: absolute;
+  z-index: 9;
 
   top: 30px;
   right: 30px;
@@ -82,6 +82,7 @@ const Socials = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-end;
+  z-index: 9;
 
   left: 30px;
   bottom: 35px;
@@ -96,6 +97,7 @@ const Social = styled.a`
 `
 
 const Location = styled.p`
+  z-index: 9;
   ${Font}
   position: absolute;
   bottom: 35px;

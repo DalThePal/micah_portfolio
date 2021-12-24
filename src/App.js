@@ -7,6 +7,7 @@ import { desktop, tablet, mobile } from 'utils/media'
 import Scroll from 'components/Scroll'
 import Nav from 'components/Nav'
 import Home from 'pages/Home'
+import Film from 'pages/Film'
 
 export const ScreenContext = createContext({fullWidth: false, desktop: false, tablet: false, mobile: false})
 
@@ -48,7 +49,7 @@ const App = () => {
 
         <Routes>
           <Route exact path="/" element={<Home/>}/>
-
+          <Route path="/film" element={<Film/>}/>
         </Routes>
 
       </Wrapper>
