@@ -10,7 +10,7 @@ const Ripples = () => {
   const { gl, camera, scene, viewport } = useThree();
 
   // BRUSH
-  let brushGeometry = useMemo(() => new THREE.PlaneGeometry(150, 150, 1, 1), [])
+  let brushGeometry = useMemo(() => new THREE.PlaneGeometry(100, 100, 1, 1), [])
   let brushMaterial = useMemo(() => new THREE.MeshBasicMaterial({
     map: new THREE.TextureLoader().load(brush),
     transparent: true,
@@ -42,9 +42,13 @@ const Ripples = () => {
   const prevMouse = useRef(new THREE.Vector2(0, 0))
   const currMouse = useRef(new THREE.Vector2(0, 0))
 
+  const maxWidthOffset = window.innerWidth > 1440 ? (window.innerWidth - 1440) / 2 : 0
+  
+
   const mouseMove = (e) => {
-    currMouse.current.x = e.clientX * (viewport.width / 519)
-    currMouse.current.y = (730 / viewport.height) - e.clientY
+    console.log(e)
+    currMouse.current.x = e.clientX - (519 / 2) - 260 - maxWidthOffset
+    currMouse.current.y = -e.clientY + (730 / 2) + 120
   }
 
   const touchMove = (e) => {
@@ -64,15 +68,27 @@ const Ripples = () => {
   // SHADER LOGIC
     let scene1 = new THREE.Scene()
 
+    // const imagePos = {
+    //   x: viewport.width * (((1440 / 2) - 519) / 1440),
+    //   y: viewport.width * (((1440 / 2) - 730) / 1440),
+    //   z: 0
+    // }
+
     const imagePos = {
-      x: viewport.width * (((1440 / 2) - (519)) / 1440),
-      y: viewport.width * (((1440 / 2) - (730 )) / 1440),
+      x: 0,
+      y: 0,
       z: 0
     }
 
+    console.log(viewport)
+
+    // const imageSize = {
+    //   x: viewport.width * (519 / 1440),
+    //   y: viewport.width * (730 / 1440)
+    // }
     const imageSize = {
-      x: viewport.width * (519 / 1440),
-      y: viewport.width * (730 / 1440)
+      x: viewport.width,
+      y: viewport.height
     }
 
     let imageGeometry = new THREE.PlaneGeometry(imageSize.x, imageSize.y, 1, 1)    

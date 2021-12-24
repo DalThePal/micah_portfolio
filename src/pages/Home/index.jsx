@@ -21,7 +21,9 @@ const Home = () => {
         <ButtonWrapper>
           <Button>view collection >></Button>
         </ButtonWrapper>
-        <ImageRipple/>
+        <Img>
+          <ImageRipple/>
+        </Img>
       </MaxWidth>
     </Wrapper>
   )
@@ -77,6 +79,7 @@ const Text = styled.div`
   position: absolute;
   white-space: pre-wrap;
   font-family: courier;
+  z-index: 2;
 
   font-size: 15px;
   right: 325px;
