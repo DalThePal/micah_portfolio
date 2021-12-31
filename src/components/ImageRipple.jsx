@@ -1,12 +1,11 @@
 import React, { useRef, useEffect, useMemo, Suspense } from 'react'
 import styled from 'styled-components'
 import * as THREE from 'three'
-import { Canvas, useLoader, useThree, useFrame } from '@react-three/fiber'
+import { Canvas, useThree, useFrame } from '@react-three/fiber'
 
-import Img from 'images/micah_home.webp'
 import brush from 'images/brush.png'
 
-const Ripples = () => {
+const Ripples = ({ image }) => {
   const { gl, camera, scene, viewport } = useThree();
 
   // BRUSH
@@ -46,9 +45,8 @@ const Ripples = () => {
   
 
   const mouseMove = (e) => {
-    console.log(e)
-    currMouse.current.x = e.clientX - (519 / 2) - 260 - maxWidthOffset
-    currMouse.current.y = -e.clientY + (730 / 2) + 120
+    currMouse.current.x = e.clientX - (image.width / 2) - 260 - maxWidthOffset
+    currMouse.current.y = -e.clientY + (image.height / 2) + 120
   }
 
   const touchMove = (e) => {
@@ -68,24 +66,12 @@ const Ripples = () => {
   // SHADER LOGIC
     let scene1 = new THREE.Scene()
 
-    // const imagePos = {
-    //   x: viewport.width * (((1440 / 2) - 519) / 1440),
-    //   y: viewport.width * (((1440 / 2) - 730) / 1440),
-    //   z: 0
-    // }
-
     const imagePos = {
       x: 0,
       y: 0,
       z: 0
     }
-
-    console.log(viewport)
-
-    // const imageSize = {
-    //   x: viewport.width * (519 / 1440),
-    //   y: viewport.width * (730 / 1440)
-    // }
+  
     const imageSize = {
       x: viewport.width,
       y: viewport.height
@@ -97,7 +83,7 @@ const Ripples = () => {
       side: THREE.DoubleSide,
       uniforms: {
         uDisplacement: { value: null },
-        uTexture: { value: new THREE.TextureLoader().load(Img) }
+        uTexture: { value: new THREE.TextureLoader().load(image.src) }
       },
       vertexShader: `
         varying vec2 vUv;
@@ -185,12 +171,12 @@ const Ripples = () => {
   </group>
 }
 
-const ImageRipple = () => {
+const ImageRipple = ({ image }) => {
 
   return (
     <StyledCanvas orthographic resize={{scroll: false}} >
       <Suspense fallback={<></>}>
-        <Ripples/>
+        <Ripples image={image}/>
       </Suspense>
     </StyledCanvas>
   )

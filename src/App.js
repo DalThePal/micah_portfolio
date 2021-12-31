@@ -8,6 +8,7 @@ import Scroll from 'components/Scroll'
 import Nav from 'components/Nav'
 import Home from 'pages/Home'
 import Film from 'pages/Film'
+import Self from 'pages/Self'
 
 export const ScreenContext = createContext({fullWidth: false, desktop: false, tablet: false, mobile: false})
 
@@ -47,10 +48,13 @@ const App = () => {
         <Scroll/>
         <Nav/>
 
-        <Routes>
-          <Route exact path="/" element={<Home/>}/>
-          <Route path="/film" element={<Film/>}/>
-        </Routes>
+        <MaxWidth>
+          <Routes>
+            <Route exact path="/" element={<Home/>}/>
+            <Route path="/film" element={<Film/>}/>
+            <Route path="/self" element={<Self/>}/>
+          </Routes>
+        </MaxWidth>
 
       </Wrapper>
     </ScreenContext.Provider>
@@ -61,4 +65,11 @@ export default App;
 
 const Wrapper = styled.main`
   overflow: hidden;
+`
+
+const MaxWidth = styled.div`
+  max-width: ${desktop}px;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
 `

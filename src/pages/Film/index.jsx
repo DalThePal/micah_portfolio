@@ -1,12 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import ImageRipple from 'components/ImageRipple'
-
 const Film = () => {
   return (
     <Wrapper>
-      <ImageRipple/>
+
     </Wrapper>
   )
 }

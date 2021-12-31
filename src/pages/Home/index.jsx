@@ -1,8 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { desktop } from 'utils/media'
-
 import Button from 'components/Button'
 import ImageRipple from 'components/ImageRipple'
 
@@ -11,20 +9,24 @@ import MicahHome from 'images/micah_home.webp'
 const Home = () => {
   return (
     <Wrapper>
-      <MaxWidth>
-        <Title>micah brown</Title>
-        <Text>{`
-          Director
-          Cinematographer
-          Editor
-        `}</Text>
-        <ButtonWrapper>
-          <Button>view collection >></Button>
-        </ButtonWrapper>
-        <Img>
-          <ImageRipple/>
-        </Img>
-      </MaxWidth>
+      <Title>micah brown</Title>
+      <Text>{`
+        Director
+        Cinematographer
+        Editor
+      `}</Text>
+      <ButtonWrapper>
+        <Button>view collection >></Button>
+      </ButtonWrapper>
+      <Img>
+        <ImageRipple
+          image={{
+            src: MicahHome,
+            width: 519,
+            height: 730
+          }}
+        />
+      </Img>
     </Wrapper>
   )
 }
@@ -32,16 +34,10 @@ const Home = () => {
 export default Home
 
 const Wrapper = styled.div`
+  position: relative;
+  width: 100%;
   min-height: 100vh;
   height: 100vh;
-`
-
-const MaxWidth = styled.div`
-  position: relative;
-  max-width: ${desktop}px;
-  height: 100%;
-  width: 100%;
-  margin: 0 auto;
 `
 
 const Img = styled.div`
